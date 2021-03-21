@@ -37,13 +37,13 @@
 
     MÉTODO PARA TRATAMENTO DE ERROS PADRÕES
     
-    ```java
+    
     @ExceptionHandler(NoSuchElementException.class)
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
     public ApiError handleNoSuchElementException(NoSuchElementException ex) {
         return buildApiError(HttpStatus.NOT_FOUND, ex.getMessage(), Collections.singletonList(ex.getMessage()));
     }
-    ```
+    
     
 
 
