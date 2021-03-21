@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.github.hugovallada.tratamentoexcessoes.exception.custom.EntityAlreadyExistException;
+import com.github.hugovallada.tratamentoexcessoes.exception.custom.RegraNegocioException;
 
 @RestControllerAdvice
 public class HandleExceptions {
@@ -51,6 +52,12 @@ public class HandleExceptions {
 	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
 	public ApiError handleEntityAlreadyExistsException(EntityAlreadyExistException exception) {
 		return buildApiError(HttpStatus.BAD_REQUEST, exception.getMessage(), Collections.singletonList(exception.getMessage()));
+	}
+	
+	@ExceptionHandler(RegraNegocioException.class)
+	@ResponseStatus(code = HttpStatus.BAD_REQUEST)
+	public ApiError handleRegraNegocioException(RegraNegocioException exception) {
+		return buildApiError(HttpStatus.BAD_REQUEST, "Problema na regra de negócio", Collections.singletonList(exception.getMessage()));
 	}
 	
 	private ApiError buildApiError(HttpStatus status, String message ,List<String> errors) {

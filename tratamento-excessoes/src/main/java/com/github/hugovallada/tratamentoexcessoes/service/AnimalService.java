@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.github.hugovallada.tratamentoexcessoes.entity.Animal;
 import com.github.hugovallada.tratamentoexcessoes.exception.custom.EntityAlreadyExistException;
+import com.github.hugovallada.tratamentoexcessoes.exception.custom.RegraNegocioException;
 import com.github.hugovallada.tratamentoexcessoes.repository.AnimalRepository;
 
 @Service
@@ -31,6 +32,7 @@ public class AnimalService {
 	
 	public Animal criarNovo(Animal animal) {
 		validaAnimalExistByName(animal.getName());
+		regraNegocio(animal);
 		return animalRepository.save(animal);
 	}
 	
@@ -39,6 +41,12 @@ public class AnimalService {
 		
 		if(animalOpt.isPresent()) {
 			throw new EntityAlreadyExistException(String.format("Já existe um animal com nome %s no banco",name));
+		}
+	}
+	
+	private void regraNegocio(Animal animal) {
+		if (animal.getNumberOfLegs() > 4) {
+			throw new RegraNegocioException("Para ser classificado nessa base, o animal não pode ter mais que 4 pernas");
 		}
 	}
 
