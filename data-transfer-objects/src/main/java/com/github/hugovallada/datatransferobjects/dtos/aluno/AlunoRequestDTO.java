@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class AlunoRequestDTO {
 
     @NotBlank(message = "O nome não pode ser nulo ou vazio")
-    @Length(min = 3, max = 30, message = "O número deve ter entre 3 e 30 caracteres")
+    @Length(min = 3, max = 30, message = "O nome deve ter entre 3 e 30 caracteres")
     private String name;
 
     @NotBlank(message = "O ra não pode ser vazio ou nulo")

@@ -3,6 +3,7 @@ package com.github.hugovallada.datatransferobjects.service;
 import com.github.hugovallada.datatransferobjects.dtos.aluno.AlunoRequestDTO;
 import com.github.hugovallada.datatransferobjects.dtos.aluno.AlunoResponseDTO;
 import com.github.hugovallada.datatransferobjects.entity.Aluno;
+import com.github.hugovallada.datatransferobjects.exception.custom.RegraNegocioException;
 import com.github.hugovallada.datatransferobjects.repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,8 +36,9 @@ public class AlunoService {
     }
 
     private void validaIdade(AlunoRequestDTO aluno) {
-        if (Period.between(aluno.getBirthDate(), LocalDate.now()).getYears() < 18) {
-            throw new RuntimeException("Idade inválida");
+        int age = Period.between(aluno.getBirthDate(), LocalDate.now()).getYears();
+        if (age < 18 || age >= 120) {
+            throw new RegraNegocioException("A idade passada está fora dos limites aceitáveis");
         }
     }
 }
