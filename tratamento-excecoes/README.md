@@ -27,7 +27,8 @@
     @RestControllerAdvice // Os métodos já terão seu retorno dentro de um response body
     public class HandleException{
 
-        private ApiError buildApiError(HttpStatus status, String message, List<String> errors){ // método que gera o retorno dos métodos handlers
+        // método que gera o retorno dos métodos handlers
+        private ApiError buildApiError(HttpStatus status, String message, List<String> errors){ 
             return ApiError.builder()
                 .code(status.value())
                 .status(status.getReasonPhrase())
