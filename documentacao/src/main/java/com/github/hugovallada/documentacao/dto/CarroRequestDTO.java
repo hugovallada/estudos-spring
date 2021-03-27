@@ -36,7 +36,6 @@ public class CarroRequestDTO {
 	
 	@ApiModelProperty(value = "Número de quilômetros rodados pelo carro", required = true)
 	@NotNull(message = "O número de km rodados não pode ser nulo")
-	@Positive(message = "O número de km rodados não é valido")
 	private Double kmRodados;
 	
 	@ApiModelProperty(value = "Número de donos que o carro já teve", required = true)

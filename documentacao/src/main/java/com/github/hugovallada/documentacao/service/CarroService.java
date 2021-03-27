@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.github.hugovallada.documentacao.dto.CarroRequestDTO;
 import com.github.hugovallada.documentacao.dto.CarroResponseDTO;
 import com.github.hugovallada.documentacao.entity.Carro;
+import com.github.hugovallada.documentacao.infra.exception.RegraNegocioException;
 import com.github.hugovallada.documentacao.repository.CarroRepository;
 
 @Service
@@ -30,6 +31,11 @@ public class CarroService {
 	}
 	
 	public CarroResponseDTO criar(CarroRequestDTO carroRequestDTO) {
+		
+		if(carroRequestDTO.getAno() < 1920 || carroRequestDTO.getAno() > 2021) {
+			throw new RegraNegocioException("O ano é inválido");
+		}
+		
 		Carro carro = carroRepository.save(carroRequestDTO.toModel());
 		return CarroResponseDTO.toDto(carro);
 	}

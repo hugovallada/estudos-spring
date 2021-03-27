@@ -19,26 +19,29 @@ import com.github.hugovallada.documentacao.service.CarroService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 
 @Api(tags = "Carro")
 @RestController
 @RequestMapping("/carro")
 public class CarroController {
-	
+
 	private final CarroService carroService;
-	
+
 	@Autowired
 	public CarroController(CarroService carroService) {
 		this.carroService = carroService;
 	}
-	
+
 	@ApiOperation(value = "Listar Carros", nickname = "listarTodosCarros")
 	@GetMapping
-	public List<CarroResponseDTO> buscarTodos(){
+	public List<CarroResponseDTO> buscarTodos() {
 		return carroService.buscarTodos();
 	}
-	
+
 	@ApiOperation(value = "Criar novo Carro", nickname = "criarNovoCarro")
+	@ApiResponses(@ApiResponse(code = 400, message = "Bad Request"))
 	@PostMapping
 	@ResponseStatus(code = HttpStatus.CREATED)
 	public CarroResponseDTO criar(@RequestBody @Valid CarroRequestDTO carroRequest) {
