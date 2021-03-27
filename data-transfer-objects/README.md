@@ -67,3 +67,22 @@
     }
 ```
 
+## Uso dos dtos em controllers e serviços:
+### Os controllers irão usar apenas DTOs, não terão conhecimento das entidades, toda a transformação de DTOs em entites/models e vice-versa ocorrerá nos serviços.
+```java
+    // AlunoService
+    public AlunoResponseDTO create(AlunoRequestDTO alunoRequestDTO){
+        Aluno aluno = alunoRepository.save(alunoRequestDTO.toModel());
+        return AlunoResponseDTO.toDto(aluno);
+    }
+```
+```java
+    // AlunoController
+    @PostMapping
+    @ResponseStatus(code = HttpStatus.CREATED)
+    public AlunoResponseDTO create(@BodyRequest @Valid AlunoRequestDTO alunoRequestDTO){
+        AlunoResponseDTO alunoResponseDTO =  alunoService.create(alunoRequestDTO);
+        return alunoResponseDTO;
+    }
+```
+
