@@ -2,9 +2,10 @@
 
 ## Seções já concluidas:
     -> Tratamento de exceções
+    -> Data Transfer Objects (DTOs)
 
 ## Seções em andamento:
-    -> Data Transfer Objects (DTOs)
+    -> Documentação com OpenApi/Swagger 2
 
 ## Seções planejadas para o futuro:
     -> Spring Security
