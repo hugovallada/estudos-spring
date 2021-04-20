@@ -1,27 +1,16 @@
-package com.github.hugovallada.tratamentoexcecoes.entity;
+package com.github.hugovallada.tratamentoexcecoes.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 import org.hibernate.validator.constraints.Length;
 
-import lombok.Data;
+public class AnimalDto {
 
-@Entity
-@Data
-public class Animal {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(unique = true)
+
 	@NotBlank(message = "O nome não pode ser nulo ou estar em branco")
 	@Length(min = 3, max = 20, message = "O nome deve ter entre 3 e 20 caracteres")
 	private String name;
@@ -33,5 +22,41 @@ public class Animal {
 	@NotNull(message = "O número de pernas não pode ser nulo")
 	@Positive(message = "O número de pernas deve ser um valor positivo")
 	private Integer numberOfLegs;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public Integer getNumberOfLegs() {
+		return numberOfLegs;
+	}
+
+	public void setNumberOfLegs(Integer numberOfLegs) {
+		this.numberOfLegs = numberOfLegs;
+	}
+	
+	
+	
+
 
 }
